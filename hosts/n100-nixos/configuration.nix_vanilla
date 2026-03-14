@@ -1,0 +1,27 @@
+{ config, pkgs, ... }:
+
+{
+  imports = [ ./hardware-configuration.nix ];
+
+  # Bootloader (EFI)
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # Netzwerk mit individueller MAC
+  networking.hostName = "n100-nixos";
+  networking.interfaces.enp2s0.macAddress = "a8:b8:e0:04:46:36";
+  networking.useDHCP = true;
+
+  # Sprache und Tastatur
+  i18n.defaultLocale = "en_US.UTF-8";
+  console.keyMap = "de";
+
+  # SSH-Zugriff (Passwort & Root vorerst erlaubt)
+  services.openssh.enable = true;
+  services.openssh.settings.PasswordAuthentication = true;
+  services.openssh.settings.PermitRootLogin = "yes";
+
+  users.users.root.initialPassword = "nixos"; # Ändere dies nach dem Booten!
+
+  system.stateVersion = "25.05";
+}
