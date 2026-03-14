@@ -22,7 +22,6 @@
     options = "altwin:swap_lalt_lwin,caps:ctrl_modifier";
   };
 
-  services.printing.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

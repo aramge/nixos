@@ -1,8 +1,10 @@
 { config, pkgs, ... }: {
   imports = [ ./ramge.nix ];
 
+  # Einheitliche Zeitzone
   time.timeZone = "Europe/Berlin";
 
+  # Standard-Spracheinstellungen
   i18n = {
     defaultLocale = "en_US.UTF-8";
     extraLocaleSettings = {
@@ -23,9 +25,11 @@
     ];
   };
 
+  # Flakes aktivieren und proprietäre Software erlauben
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
+  # Core-Tools für jeden Rechner
   environment.systemPackages = with pkgs; [
     tmux stow zsh bash python3 vim
   ];
@@ -33,8 +37,12 @@
   services.openssh.enable = true;
   programs.bash.enable = true;
 
+  # Avahi für die Auflösung von .local-Adressen (z. B. drucker.local)
   services.avahi = {
     enable = true;
     nssmdns4 = true;
   };
+
+  # Druckdienst systemweit für alle Rechner aktivieren
+  services.printing.enable = true;
 }
