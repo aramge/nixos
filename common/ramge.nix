@@ -1,5 +1,4 @@
 { pkgs, ... }: {
-  # Die Gruppe explizit definieren
   users.groups.ramge = {
     gid = 1001;
   };
@@ -7,10 +6,10 @@
   users.users.ramge = {
     isNormalUser = true;
     uid = 1001;
-    group = "ramge"; # Primäre Gruppe
+    group = "ramge";
     description = "Axel Ramge";
     extraGroups = [ "networkmanager" "wheel" "docker" "users" ];
-    shell = pkgs.zsh;
+    shell = pkgs.bashInteractive;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM8q7f2ZLoCoSgmwoP6FjzJF23c1QHI36CO8oSrJMDxd ansible"
     ];
@@ -22,4 +21,23 @@
       User git
       IdentityFile ~/.ssh/github_ed25519
   '';
+
+  home-manager.users.ramge = { osConfig, config, ... }: {
+    home.stateVersion = "25.11";
+    home.packages = with pkgs; [ tmux zsh bash emacs ghostty git ];
+    home.file = {
+      ".bashrc".source = config.lib.file.mkOutOfStoreSymlink "/home/ramge/sync/gh/dotfiles/bash/.bashrc";
+      ".bash_profile".source = config.lib.file.mkOutOfStoreSymlink "/home/ramge/sync/gh/dotfiles/bash/.bash_profile";
+      ".zshenv".source = config.lib.file.mkOutOfStoreSymlink "/home/ramge/sync/gh/dotfiles/zsh/.zshenv";
+      ".config/zsh".source = config.lib.file.mkOutOfStoreSymlink "/home/ramge/sync/gh/dotfiles/zsh/.config/zsh";
+      ".config/tmux/tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "/home/ramge/sync/gh/dotfiles/tmux/.config/tmux/tmux.conf";
+      ".config/emacs".source = config.lib.file.mkOutOfStoreSymlink "/home/ramge/sync/gh/dotfiles/emacs/.config/emacs";
+      ".config/ghostty".source = config.lib.file.mkOutOfStoreSymlink "/home/ramge/sync/gh/dotfiles/ghostty/.config/ghostty";
+      ".config/git".source = config.lib.file.mkOutOfStoreSymlink "/home/ramge/sync/gh/dotfiles/git/.config/git";
+      ".gitconfig.local".text = ''
+        [user]
+        name = ramge@${osConfig.networking.hostName}
+      '';
+    };
+  };
 }

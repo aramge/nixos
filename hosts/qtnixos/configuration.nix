@@ -34,22 +34,5 @@
     commands = [{ command = "ALL"; options = [ "NOPASSWD" ]; }];
   }];
 
-  home-manager.users.ramge = { osConfig, config, ... }: {
-    home.stateVersion = "25.11";
-    home.packages = with pkgs; [ tmux zsh emacs ghostty git ];
-    home.file = {
-      ".zshenv".source = config.lib.file.mkOutOfStoreSymlink "/home/ramge/sync/gh/dotfiles/zsh/.zshenv";
-      ".config/zsh".source = config.lib.file.mkOutOfStoreSymlink "/home/ramge/sync/gh/dotfiles/zsh/.config/zsh";
-      ".config/tmux/tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "/home/ramge/sync/gh/dotfiles/tmux/.config/tmux/tmux.conf";
-      ".config/emacs".source = config.lib.file.mkOutOfStoreSymlink "/home/ramge/sync/gh/dotfiles/emacs/.config/emacs";
-      ".config/ghostty".source = config.lib.file.mkOutOfStoreSymlink "/home/ramge/sync/gh/dotfiles/ghostty/.config/ghostty";
-      ".config/git".source = config.lib.file.mkOutOfStoreSymlink "/home/ramge/sync/gh/dotfiles/git/.config/git";
-      ".gitconfig.local".text = ''
-        [user]
-        name = ramge@${osConfig.networking.hostName}
-      '';
-    };
-  };
-
   system.stateVersion = "25.11";
 }

@@ -14,12 +14,12 @@
       LC_NUMERIC = "de_DE.UTF-8";
       LC_PAPER = "de_DE.UTF-8";
       LC_TELEPHONE = "de_DE.UTF-8";
-      LC_TIME = "en_DK.UTF-8"; # Der ISO-Goldstandard
+      LC_TIME = "en_DK.UTF-8";
     };
     supportedLocales = [
       "en_US.UTF-8/UTF-8"
       "de_DE.UTF-8/UTF-8"
-      "en_DK.UTF-8/UTF-8" # Jetzt als English-Denmark
+      "en_DK.UTF-8/UTF-8"
     ];
   };
 
@@ -27,11 +27,11 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    tmux stow zsh python3 vim
+    tmux stow zsh bash python3 vim
   ];
 
   services.openssh.enable = true;
-  programs.zsh.enable = true;
+  programs.bash.enable = true;
 
   programs.git = {
     enable = true;
