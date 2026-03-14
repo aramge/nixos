@@ -33,13 +33,8 @@
   services.openssh.enable = true;
   programs.bash.enable = true;
 
-  programs.git = {
+  services.avahi = {
     enable = true;
-    config = {
-      user = {
-        name = "ramge@${config.networking.hostName}";
-        email = "axel@ramge.de";
-      };
-    };
+    nssmdns4 = true;
   };
 }

@@ -4,25 +4,35 @@
   imports = [
     ./hardware-configuration.nix
     ../../common/default.nix
-    ../../common/desktop-base.nix
-    ../../common/desktop-xfce.nix
+    ../../common/desktop.nix
   ];
 
   networking.hostName = "n100-nixos";
+  networking.networkmanager.enable = true;
+  networking.interfaces.enp2s0.macAddress = "a8:b8:e0:04:46:36";
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelParams = [ "console=tty0" "console=ttyS0,115200" ];
 
-  services.xrdp = {
-    enable = true;
-    defaultWindowManager = "xfce4-session";
-    openFirewall = true;
+  console.keyMap = "de";
+  services.xserver.xkb = {
+    layout = "de";
+    variant = pkgs.lib.mkForce "nodeadkeys";
+    options = "altwin:swap_lalt_lwin,caps:ctrl_modifier";
   };
 
-  security.sudo.extraRules = [{
-    users = [ "ramge" ];
-    commands = [{ command = "ALL"; options = [ "NOPASSWD" ]; }];
-  }];
+  services.printing.enable = true;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
+  virtualisation.docker.enable = true;
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;

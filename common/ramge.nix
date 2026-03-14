@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   users.groups.ramge = {
     gid = 1001;
   };
@@ -15,12 +15,27 @@
     ];
   };
 
+  security.sudo.extraRules = [{
+    users = [ "ramge" ];
+    commands = [{ command = "ALL"; options = [ "NOPASSWD" ]; }];
+  }];
+
   programs.ssh.extraConfig = ''
     Host github.com
       HostName github.com
       User git
       IdentityFile ~/.ssh/github_ed25519
   '';
+
+  programs.git = {
+    enable = true;
+    config = {
+      user = {
+        name = "ramge@${config.networking.hostName}";
+        email = "axel@ramge.de";
+      };
+    };
+  };
 
   home-manager.users.ramge = { osConfig, config, ... }: {
     home.stateVersion = "25.11";
