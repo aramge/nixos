@@ -16,7 +16,6 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = [ "console=tty0" "console=ttyS0,115200" ];
 
-  console.keyMap = "de";
   services.xserver.xkb = {
     layout = "de";
     variant = pkgs.lib.mkForce "nodeadkeys";

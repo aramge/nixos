@@ -3,36 +3,32 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../common/default.nix
+    ../../common/default.nix # Hierüber kommt die ramge.nix mit Sudo-Regeln und User-Settings
   ];
 
+  # Bootloader-Konfiguration für EFI-Systeme
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  
+  # Kernel-Parameter, wichtig für die serielle Konsole im Headless-Betrieb
   boot.kernelParams = [ "console=tty0" "console=ttyS0,115200" ];
 
+  # Netzwerkkonfiguration
   networking.hostName = "bnixos";
   networking.networkmanager.enable = true;
 
+  # Klassische Tastaturbelegung für die Textkonsole (da kein X-Server existiert)
   console.keyMap = "de";
 
-  security.sudo.extraRules = [
-    {
-      users = [ "ramge" ];
-      commands = [
-        {
-          command = "ALL";
-          options = [ "NOPASSWD" ];
-        }
-      ];
-    }
-  ];
-
+  # Docker-Aktivierung für Container-Workloads
   virtualisation.docker.enable = true;
 
+  # Server-spezifische Pakete (Emacs ohne X11-Abhängigkeiten)
   environment.systemPackages = with pkgs; [
     emacs-nox
   ];
 
+  # NixOS Release-Version (nicht ändern, außer bei Neuinstallationen)
   system.stateVersion = "25.11";
 }
