@@ -32,6 +32,7 @@
   # Core-Tools für jeden Rechner
   environment.systemPackages = with pkgs; [
     tmux stow zsh bash python3 vim
+    texlive.combined.scheme-medium
   ];
 
   services.openssh.enable = true;
@@ -45,4 +46,15 @@
 
   # Druckdienst systemweit für alle Rechner aktivieren
   services.printing.enable = true;
+
+  hardware.printers = {
+    ensurePrinters = [
+      {
+        name = "drucker";
+        deviceUri = "ipp://drucker.local/ipp/print";
+        model = "everywhere";
+      }
+    ];
+    ensureDefaultPrinter = "drucker";
+  };
 }

@@ -25,5 +25,6 @@
   environment.systemPackages = with pkgs; [
     emacs
     google-chrome
+    alsa-utils
   ];
 }
