@@ -36,7 +36,7 @@
   ];
 
   services.openssh.enable = true;
-  programs.bash.enable = true;
+  programs.zsh.enable = true;
 
   # Avahi für die Auflösung von .local-Adressen (z. B. drucker.local)
   services.avahi = {
