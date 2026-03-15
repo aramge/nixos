@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   services.xserver = {
     enable = true;
+    dpi = 120;
     displayManager.lightdm.enable = true;
     desktopManager.xfce.enable = true;
     windowManager.xmonad.enable = true;
@@ -9,9 +10,6 @@
       layout = "de";
       variant = "mac_nodeadkeys";
     };
-    displayManager.sessionCommands = ''
-      ${pkgs.xorg.xrandr}/bin/xrandr --dpi 144
-    '';
   };
   
   console.useXkbConfig = true;
