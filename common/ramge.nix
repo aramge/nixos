@@ -9,7 +9,7 @@
     group = "ramge";
     description = "Axel Ramge";
     extraGroups = [ "networkmanager" "wheel" "docker" "users" ];
-    shell = pkgs.bashInteractive;
+    shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM8q7f2ZLoCoSgmwoP6FjzJF23c1QHI36CO8oSrJMDxd ansible"
     ];
