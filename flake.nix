@@ -43,6 +43,13 @@
           home-manager.nixosModules.home-manager
         ];
       };
+      mbp2 = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        modules = [ 
+          ./hosts/mbp2/configuration.nix
+          home-manager.nixosModules.home-manager
+        ];
+      };
     };
   };
 }
