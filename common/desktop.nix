@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   services.xserver = {
     enable = true;
     dpi = 120;
@@ -22,7 +22,23 @@
 
   environment.systemPackages = with pkgs; [
     emacs
-    google-chrome
+    ghostty
     alsa-utils
+    keepassxc
+    libreoffice
+    freecad
+    gimp
+    inkscape
+    ghostty
+    gnucash
+    mediathekview
+    tigervnc 
+    vlc
+    wasistlos
+  ] ++ lib.optionals stdenv.isx86_64 [
+      google-chrome
+      winbox
+  ] ++ lib.optionals stdenv.isAarch64 [
+      chromium
   ];
 }

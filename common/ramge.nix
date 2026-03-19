@@ -39,7 +39,7 @@
 
   home-manager.users.ramge = { osConfig, config, ... }: {
     home.stateVersion = "25.11";
-    home.packages = with pkgs; [ tmux zsh bash emacs ghostty git ];
+    home.packages = with pkgs; [ tmux zsh bash emacs ghostty git rofi ];
     home.file = {
       ".bashrc".source = config.lib.file.mkOutOfStoreSymlink "/home/ramge/sync/gh/dotfiles/bash/.bashrc";
       ".bash_profile".source = config.lib.file.mkOutOfStoreSymlink "/home/ramge/sync/gh/dotfiles/bash/.bash_profile";
@@ -48,6 +48,7 @@
       ".config/tmux/tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "/home/ramge/sync/gh/dotfiles/tmux/.config/tmux/tmux.conf";
       ".config/emacs".source = config.lib.file.mkOutOfStoreSymlink "/home/ramge/sync/gh/dotfiles/emacs/.config/emacs";
       ".config/ghostty".source = config.lib.file.mkOutOfStoreSymlink "/home/ramge/sync/gh/dotfiles/ghostty/.config/ghostty";
+      ".config/xmonad".source = config.lib.file.mkOutOfStoreSymlink "/home/ramge/sync/gh/dotfiles/xmonad/.config/xmonad";
       ".config/git".source = config.lib.file.mkOutOfStoreSymlink "/home/ramge/sync/gh/dotfiles/git/.config/git";
       ".gitconfig.local".text = ''
         [user]
