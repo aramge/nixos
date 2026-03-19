@@ -43,10 +43,11 @@
           home-manager.nixosModules.home-manager
         ];
       };
-      mbp2 = nixpkgs.lib.nixosSystem {
+      mnixos = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
         specialArgs = { inherit inputs; };
         modules = [ 
-          ./hosts/mbp2/configuration.nix
+          ./hosts/mnixos/configuration.nix
           home-manager.nixosModules.home-manager
         ];
       };
