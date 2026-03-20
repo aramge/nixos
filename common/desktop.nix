@@ -21,20 +21,26 @@
   };
 
   environment.systemPackages = with pkgs; [
-    emacs
-    ghostty
     alsa-utils
+    emacs
+    freecad
+    fzf
+    ghostty
+    ghostty
+    gimp
+    gmrun
+    gnucash
+    inkscape
     keepassxc
     libreoffice
-    freecad
-    gimp
-    inkscape
-    ghostty
-    gnucash
+    maim
     mediathekview
+    rofi
     tigervnc 
     vlc
     wasistlos
+    xclip
+    xmobar
   ] ++ lib.optionals stdenv.isx86_64 [
       google-chrome
       winbox

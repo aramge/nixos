@@ -31,8 +31,12 @@
 
   # Core-Tools für jeden Rechner
   environment.systemPackages = with pkgs; [
-    tmux stow zsh bash python3 vim
+    bash
+    python3
     texlive.combined.scheme-medium
+    tmux
+    vim
+    zsh
   ];
 
   services.openssh.enable = true;

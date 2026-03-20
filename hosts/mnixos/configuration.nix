@@ -14,11 +14,28 @@
   networking.networkmanager.enable = true;
   hardware.enableRedistributableFirmware = true;
 
-  services.libinput.enable = true;
-  services.libinput.touchpad.naturalScrolling = true;
-  services.libinput.touchpad.tapping = true;
-  services.libinput.touchpad.clickMethod = "clickfinger";
-  services.libinput.touchpad.disableWhileTyping = true;
+  services.libinput = {
+    enable = true;
+    mouse.naturalScrolling = true;
+    touchpad.naturalScrolling = true;
+  };
+
+  # Spezifischer Fix für den UTM/Apple Digitizer
+  services.xserver.inputClassSections = [
+    ''
+      Identifier "UTM Digitizer Scroll Fix"
+      MatchProduct "Apple Inc. Virtual USB Digitizer"
+      Driver "libinput"
+      Option "NaturalScrolling" "true"
+      Option "ScrollMethod" "twofinger"
+      Option "HorizontalScrolling" "true"
+    ''
+  ];
+  
+  services.xserver.displayManager.sessionCommands = ''
+    xrandr --output Virtual-1 --mode 2560x1440
+    echo "Xft.dpi: 96" | xrdb -merge
+  '';
 
   security.rtkit.enable = true;
   services.pipewire = {
