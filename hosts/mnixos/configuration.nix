@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -31,7 +31,19 @@
       Option "HorizontalScrolling" "true"
     ''
   ];
+
+  services.xserver.xkb = lib.mkForce {
+    layout = "de";
+    variant = "mac_nodeadkeys";
+  };
   
+  # Workaround für den AVF ISO-Bug (< und ^ vertauscht)
+  services.udev.extraHwdb = ''
+    evdev:input:b*v*p*e*
+     KEYBOARD_KEY_70035=102nd
+     KEYBOARD_KEY_70064=grave
+  '';  
+
   services.xserver.displayManager.sessionCommands = ''
     xrandr --output Virtual-1 --mode 2560x1440
     echo "Xft.dpi: 96" | xrdb -merge

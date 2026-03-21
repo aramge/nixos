@@ -40,7 +40,7 @@
 
   services.qemuGuest.enable = true;
   services.xrdp.enable = true;
-  services.xrdp.defaultWindowManager = "xfce4-session";
+  services.xrdp.defaultWindowManager = "xmonad";
   services.xrdp.openFirewall = true;
 
   environment.systemPackages = with pkgs; [

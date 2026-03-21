@@ -25,7 +25,7 @@
   services.qemuGuest.enable = true;
   services.xrdp = {
     enable = true;
-    defaultWindowManager = "xfce4-session";
+    defaultWindowManager = "xmonad";
     openFirewall = true;
   };
 

@@ -3,29 +3,22 @@
     enable = true;
     dpi = 120;
     displayManager.lightdm.enable = true;
-    desktopManager.xfce.enable = true;
     windowManager.xmonad.enable = true;
     windowManager.xmonad.enableContribAndExtras = true;
     xkb = {
       layout = "de";
-      variant = "mac_nodeadkeys";
+      variant = "nodeadkeys";
+      model = "pc105";
     };
   };
   
   console.useXkbConfig = true;
-
-  services.xrdp = {
-    enable = true;
-    defaultWindowManager = "xfce4-session";
-    openFirewall = true;
-  };
 
   environment.systemPackages = with pkgs; [
     alsa-utils
     emacs
     freecad
     fzf
-    ghostty
     ghostty
     gimp
     gmrun
