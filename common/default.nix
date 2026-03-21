@@ -33,7 +33,6 @@
   environment.systemPackages = with pkgs; [
     bash
     python3
-    texlive.combined.scheme-medium
     tmux
     vim
     zsh

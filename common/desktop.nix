@@ -36,6 +36,7 @@
     maim
     mediathekview
     rofi
+    texlive.combined.scheme-full
     tigervnc 
     vlc
     wasistlos
