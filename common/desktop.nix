@@ -28,6 +28,7 @@
     libreoffice
     maim
     mediathekview
+    remmina
     rofi
     texlive.combined.scheme-full
     tigervnc 

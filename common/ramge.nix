@@ -43,7 +43,6 @@
       link = config.lib.file.mkOutOfStoreSymlink;
     in {
       home.stateVersion = "25.11";
-      home.packages = with pkgs; [ tmux zsh bash emacs ghostty git rofi ];
       
       home.file = {
         ".bashrc".source               = link "${dotfiles}/bash/.bashrc";
