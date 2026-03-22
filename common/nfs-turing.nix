@@ -8,7 +8,7 @@
   };
 
   fileSystems."/mnt/turing/gh" = {
-    device = "turing:/usr/home/ramge/sync/gh";
+    device = "turing:/home/ramge/sync/gh";
     fsType = "nfs";
     options = [ "x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" "nolock" "soft" ];
   };
