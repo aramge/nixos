@@ -62,6 +62,7 @@
   fileSystems."/home/ramge/sync" = {
     device = "sync";
     fsType = "virtiofs";
+    options = [ "nofail" ];
   };
   
   environment.systemPackages = with pkgs; [
