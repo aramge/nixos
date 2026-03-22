@@ -12,8 +12,6 @@
     };
   };
 
-  services.picom.enable = true;
-  
   console.useXkbConfig = true;
 
   environment.systemPackages = with pkgs; [
