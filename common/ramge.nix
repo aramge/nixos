@@ -57,6 +57,7 @@
         ".config/ghostty".source       = link "${dotfiles}/ghostty/.config/ghostty";
         ".config/git".source           = link "${dotfiles}/git/.config/git";
         ".config/tmux/tmux.conf".source = link "${dotfiles}/tmux/.config/tmux/tmux.conf";
+        ".config/picom/picom.conf".source = link "${dotfiles}/tmux/.config/picom/picom.conf";
         ".xmobarrc".source             = link "${dotfiles}/xmobar/.xmobarrc";
         ".config/xmonad".source        = link "${dotfiles}/xmonad/.config/xmonad";
        ".config/zsh".source           = link "${dotfiles}/zsh/.config/zsh";       

@@ -1,7 +1,7 @@
 { pkgs, lib, ... }: {
   services.xserver = {
     enable = true;
-    dpi = 120;
+    dpi = 192;
     displayManager.lightdm.enable = true;
     windowManager.xmonad.enable = true;
     windowManager.xmonad.enableContribAndExtras = true;
@@ -11,6 +11,8 @@
       model = "pc105";
     };
   };
+
+  services.picom.enable = true;
   
   console.useXkbConfig = true;
 
