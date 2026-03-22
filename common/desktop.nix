@@ -15,6 +15,17 @@
   console.useXkbConfig = true;
 
   environment.systemPackages = with pkgs; [
+    (writeShellScriptBin "fix-dpi" ''
+    WIDTH=$(${xlibs.xrandr}/bin/xrandr | ${gnugrep}/bin/grep "Virtual-1 connected" | ${gnugrep}/bin/grep -oP '\d+(?=x)')
+
+    if [ "$WIDTH" -eq 3024 ]; then
+        echo "Xft.dpi: 172" | ${xlibs.xrdb}/bin/xrdb -merge
+    elif [ "$WIDTH" -eq 2560 ]; then
+        echo "Xft.dpi: 109" | ${xlibs.xrdb}/bin/xrdb -merge
+    else
+        echo "Xft.dpi: 96" | ${xlibs.xrdb}/bin/xrdb -merge
+    fi
+  '')
     alsa-utils
     emacs
     freecad
