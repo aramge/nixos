@@ -58,7 +58,7 @@
         ".config/git".source           = link "${dotfiles}/git/.config/git";
         ".config/gtk/.config/gtk-3.0/gtk.css".source = link "${dotfiles}/gtk/.config/gtk-3.0";
         ".config/tmux/tmux.conf".source =link "${dotfiles}/tmux/.config/tmux/tmux.conf";
-        ".xmobarrc".source = link "${dotfiles}/xmobar/.config/xmobar/.xmobarrc";
+        ".xmobarrc".source             = link "${dotfiles}/xmobar/xmobarrc";
         ".config/xmonad".source        = link "${dotfiles}/xmonad/.config/xmonad";
         ".config/zsh".source           = link "${dotfiles}/zsh/.config/zsh";       
       };
