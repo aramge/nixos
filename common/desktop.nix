@@ -16,16 +16,24 @@
 
   environment.systemPackages = with pkgs; [
     (writeShellScriptBin "fix-dpi" ''
-    WIDTH=$(${xlibs.xrandr}/bin/xrandr | ${gnugrep}/bin/grep "Virtual-1 connected" | ${gnugrep}/bin/grep -oP '\d+(?=x)')
+    # Pfade explizit über Nix-Store auflösen
+    XRANDR="${xorg.xrandr}/bin/xrandr"
+    XRDB="${xorg.xrdb}/bin/xrdb"
+    GREP="${gnugrep}/bin/grep"
+
+    WIDTH=$($XRANDR | $GREP "Virtual-1 connected" | $GREP -oP '\d+(?=x)')
 
     if [ "$WIDTH" -eq 3024 ]; then
-        echo "Xft.dpi: 172" | ${xlibs.xrdb}/bin/xrdb -merge
+        # MacBook Pro 14"
+        echo "Xft.dpi: 172" | $XRDB -merge
     elif [ "$WIDTH" -eq 2560 ]; then
-        echo "Xft.dpi: 109" | ${xlibs.xrdb}/bin/xrdb -merge
+        # LG 27"
+        echo "Xft.dpi: 109" | $XRDB -merge
     else
-        echo "Xft.dpi: 96" | ${xlibs.xrdb}/bin/xrdb -merge
+        # Fallback
+        echo "Xft.dpi: 96" | $XRDB -merge
     fi
-  '')
+    '')
     alsa-utils
     emacs
     freecad
