@@ -22,13 +22,17 @@
     options = "altwin:swap_lalt_lwin,caps:ctrl_modifier";
   };
 
-
-  services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="sound", KERNEL=="card*", \
-    ATTRS{idVendor}=="2a39", ATTRS{idProduct}=="3fb0", \
-    RUN+="${pkgs.alsa-utils}/bin/amixer -c BabyfacePro set 'PCM-AN1-PH3' 100%% unmute", \
-    RUN+="${pkgs.alsa-utils}/bin/amixer -c BabyfacePro set 'PCM-AN1-PH4' 100%% unmute"
-  '';
+  services.libinput = {
+    enable = true;
+    mouse.leftHanded = true;
+  }
+    
+  # services.udev.extraRules = ''
+  #   ACTION=="add", SUBSYSTEM=="sound", KERNEL=="card*", \
+  #   ATTRS{idVendor}=="2a39", ATTRS{idProduct}=="3fb0", \
+  #   RUN+="${pkgs.alsa-utils}/bin/amixer -c BabyfacePro set 'PCM-AN1-PH3' 100%% unmute", \
+  #   RUN+="${pkgs.alsa-utils}/bin/amixer -c BabyfacePro set 'PCM-AN1-PH4' 100%% unmute"
+  # '';
 
   security.rtkit.enable = true;
   services.pipewire = {
