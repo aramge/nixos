@@ -58,7 +58,12 @@
     alsa.enable = true;
     pulse.enable = true;
   };
-
+  
+  fileSystems."/home/ramge/sync" = {
+    device = "sync";
+    fsType = "virtiofs";
+  };
+  
   environment.systemPackages = with pkgs; [
     brightnessctl
     spice-vdagent
