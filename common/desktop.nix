@@ -48,6 +48,7 @@
     libreoffice
     maim
     mediathekview
+    pulseaudio
     remmina
     rofi
     texlive.combined.scheme-full
