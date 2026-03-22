@@ -39,7 +39,7 @@
 
   home-manager.users.ramge = { osConfig, config, ... }: 
     let
-      dotfiles = "/home/ramge/sync-old/gh/dotfiles";
+      dotfiles = "/home/ramge/sync/gh/dotfiles";
       link = config.lib.file.mkOutOfStoreSymlink;
     in {
       home.stateVersion = "25.11";
