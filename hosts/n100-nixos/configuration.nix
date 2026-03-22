@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ../../common/default.nix
     ../../common/desktop.nix
+    ../../common/nfs-turing.nix
   ];
 
   networking.hostName = "n100-nixos";
@@ -25,7 +26,7 @@
   services.libinput = {
     enable = true;
     mouse.leftHanded = true;
-  }
+  };
     
   # services.udev.extraRules = ''
   #   ACTION=="add", SUBSYSTEM=="sound", KERNEL=="card*", \
