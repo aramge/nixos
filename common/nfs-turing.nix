@@ -12,4 +12,9 @@
     fsType = "nfs";
     options = [ "x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" "nolock" "soft" ];
   };
+  systemd.tmpfiles.rules = [
+    "d /home/ramge/sync 0755 ramge ramge -"
+    "L /home/ramge/sync/gh - ramge ramge - /mnt/turing/gh"
+    "L /home/ramge/sync/st - ramge ramge - /mnt/turing/files"
+  ];
 }
