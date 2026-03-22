@@ -35,6 +35,7 @@
   #   RUN+="${pkgs.alsa-utils}/bin/amixer -c BabyfacePro set 'PCM-AN1-PH4' 100%% unmute"
   # '';
 
+  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

@@ -38,8 +38,14 @@
     zsh
   ];
 
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+  };
+  
   services.openssh.enable = true;
-  programs.zsh.enable = true;
 
   # Avahi für die Auflösung von .local-Adressen (z. B. drucker.local)
   services.avahi = {
