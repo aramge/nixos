@@ -59,11 +59,14 @@
     pulse.enable = true;
   };
   
-  fileSystems."/home/ramge/sync" = {
-    device = "sync";
+  fileSystems."/mnt/mac-share" = {
+    device = "share";
     fsType = "virtiofs";
-    options = [ "nofail" ];
+    options = [ "nofail" "x-systemd.automount" "noauto" ];
   };
+  systemd.tmpfiles.rules = [
+  "L+ /home/ramge/sync - - - - /mnt/mac-share/sync"
+];
   
   environment.systemPackages = with pkgs; [
     brightnessctl
