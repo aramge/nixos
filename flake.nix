@@ -61,6 +61,15 @@
           sops-nix.nixosModules.sops
         ];
       };
+      # mbp2
+      mbp2 = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        modules = [ 
+          ./hosts/mbp2/configuration.nix
+          home-manager.nixosModules.home-manager
+          sops-nix.nixosModules.sops
+        ];
+      };
     };
   };
 }

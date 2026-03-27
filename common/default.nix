@@ -4,6 +4,14 @@
   # Einheitliche Zeitzone
   time.timeZone = "Europe/Berlin";
 
+  # Globale Tastatur-Basiskonfiguration
+  services.xserver.xkb = {
+    layout = "de";
+    variant = "nodeadkeys"; # Standard für normale PCs
+    options = "ctrl:nocaps";
+  };
+  console.useXkbConfig = true;
+
   # Standard-Spracheinstellungen
   i18n = {
     defaultLocale = "en_US.UTF-8";

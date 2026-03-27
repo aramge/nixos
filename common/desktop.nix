@@ -5,14 +5,7 @@
     displayManager.lightdm.enable = true;
     windowManager.xmonad.enable = true;
     windowManager.xmonad.enableContribAndExtras = true;
-    xkb = {
-      layout = "de";
-      variant = "nodeadkeys";
-      model = "pc105";
-    };
   };
-
-  console.useXkbConfig = true;
 
   environment.systemPackages = with pkgs; [
     (writeShellScriptBin "fix-dpi" ''
