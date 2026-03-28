@@ -56,8 +56,9 @@
         ".config/emacs".source         = link "${dotfiles}/emacs/.config/emacs";
         ".config/ghostty".source       = link "${dotfiles}/ghostty/.config/ghostty";
         ".config/git".source           = link "${dotfiles}/git/.config/git";
-        ".config/gtk/.config/gtk-3.0/gtk.css".source = link "${dotfiles}/gtk/.config/gtk-3.0";
+        ".config/hypr".source          = link "${dotfiles}/hypr/.config/hypr";
         ".config/tmux/tmux.conf".source =link "${dotfiles}/tmux/.config/tmux/tmux.conf";
+        ".config/waybar".source        = link "${dotfiles}/waybar/.config/waybar";
         ".xmobarrc".source             = link "${dotfiles}/xmobar/xmobarrc";
         ".config/xmonad".source        = link "${dotfiles}/xmonad/.config/xmonad";
         ".config/zsh".source           = link "${dotfiles}/zsh/.config/zsh";       

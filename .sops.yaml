@@ -1,10 +1,10 @@
 keys:
-  - &admin age10d33vz4nfsdhr0pfxsznxpchqd7wneflcgv2nye5ddhdmvx44ufs4585pu
-  - &qtnixos age1fhtlan8nlnns9fzy9mwd2hfj6pv9rxy8eyx5yp7pj6p0tr67fv7qpgvahe
-
+  - &admin age1yxu5s22t3ggg4zspmklv58893kaf5vmzu2erk8t9dmamdquaxffq3lwmp4
+  - &mbp2 age1kslu8m2ywet3fe9dr7ehqqsz7mkg0ugj6jdhh8m6rdd5erakkuusyx0sx2
+  
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:
     - age:
       - *admin
-      - *qtnixos
+      - *mbp2

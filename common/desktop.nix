@@ -1,11 +1,46 @@
 { pkgs, lib, ... }: {
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true; # Wichtig für einige ältere Apps/Steam
+  };
+
   services.xserver = {
     enable = true;
     dpi = 192;
-    displayManager.lightdm.enable = true;
+    displayManager.lightdm.enable = false;
     windowManager.xmonad.enable = true;
     windowManager.xmonad.enableContribAndExtras = true;
   };
+
+  # Hyprland nativ aktivieren (baut die Session für LightDM)
+  programs.hyprland = {
+    enable = true;
+  };
+  programs.waybar.enable = true;
+  fonts.packages = with pkgs; [
+    # Nur das spezifische Set installieren (spart Platz und Zeit)
+    nerd-fonts.jetbrains-mono
+  
+    # Für allgemeine Emojis und Fallbacks
+    noto-fonts
+    noto-fonts-color-emoji
+  ];
+
+  # xdg.portal = {
+  #   enable = true;
+  #   extraPortals = [
+  #     pkgs.xdg-desktop-portal-hyprland
+  #     pkgs.xdg-desktop-portal-gtk # Zwingend als Fallback für GTK-Apps (Ghostty etc.)
+  #   ];
+  #   config = {
+  #     common.default = [ "gtk" ];
+  #     hyprland.default = [ "hyprland" "gtk" ];
+  #   };
+  # };
+
+  # # D-Bus muss sauber laufen
+  # services.dbus.enable = true;
 
   environment.systemPackages = with pkgs; [
     (writeShellScriptBin "fix-dpi" ''
@@ -18,16 +53,17 @@
 
       if [ "$WIDTH" -eq 3024 ]; then
         # MacBook Pro 14"
-	echo "Xft.dpi: 172" | $XRDB -merge
+        echo "Xft.dpi: 172" | $XRDB -merge
       elif [ "$WIDTH" -eq 2560 ]; then
         # LG 27"
         echo "Xft.dpi: 109" | $XRDB -merge
       else
-	# Fallback
-	echo "Xft.dpi: 96" | $XRDB -merge
+        # Fallback
+        echo "Xft.dpi: 96" | $XRDB -merge
       fi
       ''
     )
+    adwaita-icon-theme
     alsa-utils
     emacs
     freecad
@@ -38,18 +74,27 @@
     gnucash
     inkscape
     keepassxc
+    kitty
     libreoffice
     maim
     mediathekview
+    pavucontrol
     pulseaudio
+    rclone
     remmina
     rofi
     texlive.combined.scheme-full
-    tigervnc 
+    tigervnc
     vlc
     wasistlos
     xclip
     xmobar
+
+    # --- Dual-Use & Wayland Tools ---
+    wl-clipboard  # Wayland-Alternative zu xclip
+    grim          # Wayland-Alternative zu maim (Screenshots)
+    slurp         # Wayland-Auswahlwerkzeug (für grim)
+
   ] ++ lib.optionals stdenv.isx86_64 [
       google-chrome
       winbox

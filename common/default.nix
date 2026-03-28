@@ -41,6 +41,7 @@
   environment.systemPackages = with pkgs; [
     bash
     python3
+    sops
     tmux
     vim
     zsh
@@ -55,6 +56,10 @@
   
   services.openssh.enable = true;
 
+  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+
+  services.blueman.enable = true;
+  
   # Avahi für die Auflösung von .local-Adressen (z. B. drucker.local)
   services.avahi = {
     enable = true;
