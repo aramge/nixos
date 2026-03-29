@@ -40,7 +40,11 @@
   # Core-Tools für jeden Rechner
   environment.systemPackages = with pkgs; [
     bash
+    bat
+    btop
+    fd
     python3
+    ripgrep
     sops
     tmux
     vim
