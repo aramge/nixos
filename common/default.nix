@@ -3,6 +3,8 @@
 
   # Einheitliche Zeitzone
   time.timeZone = "Europe/Berlin";
+  
+  services.gvfs.enable = true;
 
   # Globale Tastatur-Basiskonfiguration
   services.xserver.xkb = {
@@ -37,16 +39,27 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
+  # udisks2 für automatisches/einfaches Mounten aktivieren
+  services.udisks2.enable = true;
+
+  # Unterstützung für gängige externe Dateisysteme aktivieren
+  boot.supportedFilesystems = [ "ntfs" "exfat" "zfs" ];
+  networking.hostId = builtins.substring 0 8 (builtins.hashString "sha256" config.networking.hostName);
+  
   # Core-Tools für jeden Rechner
   environment.systemPackages = with pkgs; [
+    abduco
     bash
     bat
     btop
+    exfat    # Für moderne SD-Karten/Sticks (ExFAT)
     fd
+    ntfs3g   # Für Windows-Festplatten (NTFS)
     python3
     ripgrep
     sops
     tmux
+    usbutils
     vim
     zsh
   ];
@@ -64,6 +77,12 @@
 
   services.blueman.enable = true;
   
+  services.emacs = {
+    enable = true;
+    startWithGraphical = false;
+    package = pkgs.emacs-nox;
+  };
+
   # Avahi für die Auflösung von .local-Adressen (z. B. drucker.local)
   services.avahi = {
     enable = true;
@@ -77,7 +96,7 @@
     ensurePrinters = [
       {
         name = "drucker";
-        deviceUri = "ipp://drucker.local/ipp/print";
+        deviceUri = "ipp://drucker.m.ramge-pm.de/ipp/print";
         model = "everywhere";
       }
     ];

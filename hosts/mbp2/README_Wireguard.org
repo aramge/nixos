@@ -1,0 +1,10 @@
+#+TITLE: Wireguard unter NixOS
+
+* Starten
+
+=wg-quick up wg0= heißt unter NixOS: =sudo systemctl start wg-quick-wg0=. Muss man auch erstmal drauf kommen
+
+* Stoppen
+
+=sudo systemctl stop wg-quick-wg0=
+

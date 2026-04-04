@@ -1,10 +1,25 @@
 keys:
   - &admin age1yxu5s22t3ggg4zspmklv58893kaf5vmzu2erk8t9dmamdquaxffq3lwmp4
   - &mbp2 age1kslu8m2ywet3fe9dr7ehqqsz7mkg0ugj6jdhh8m6rdd5erakkuusyx0sx2
-  
+  # - &mbp3 age1... (wird hier später ergänzt)
+
 creation_rules:
-  - path_regex: secrets/[^/]+\.yaml$
+  # Host-spezifische Regeln: Greifen exakt für die Datei des jeweiligen Hosts
+  - path_regex: secrets/mbp2\.yaml$
     key_groups:
     - age:
       - *admin
       - *mbp2
+
+  # - path_regex: secrets/mbp3\.yaml$
+  #   key_groups:
+  #   - age:
+  #     - *admin
+  #     - *mbp3
+
+  # Fallback-Regel: Greift für alle anderen YAML-Dateien (z. B. deine rclone.yml)
+  - path_regex: secrets/[^/]+\.yaml$
+    key_groups:
+    - age:
+      - *admin
+      - *mbp2 # Ggf. anpassen, je nachdem wer auf rclone zugreifen soll

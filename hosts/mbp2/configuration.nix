@@ -6,13 +6,28 @@
     ../../common/default.nix
     ../../common/desktop.nix
     ../../common/gdrive-mount.nix
+    ../../common/syncthing.nix
     ./fix_broadcom.nix
+    ./wg0.nix
     ./applesmc-next.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  services.mbpfan = {
+    enable = true;
+    settings.general = {
+      low_temp = 55;        # Temperatur, bei der die Lüfter spürbar anlaufen
+      high_temp = 75;       # Temperatur für stärkeren Lüfter-Einsatz
+      max_temp = 88;        # Ab hier drehen die Lüfter auf 100% (Standard ist oft erst bei 85°C)
+      polling_interval = 1; # Sensoren jede Sekunde prüfen
+    };
+  };
+  
+#  powerManagement.cpuFreqGovernor = "powersave";
+  powerManagement.cpuFreqGovernor = "schedutil";
+  
   networking.hostName = "mbp2";
   networking.networkmanager.enable = true;
   hardware.enableRedistributableFirmware = true;
