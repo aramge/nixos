@@ -32,10 +32,13 @@
       ghostty
       gimp
       gmrun
+      gnomeExtensions.forge
+      gnome-tweaks
       gnucash
       inkscape
       keepassxc
       kitty
+      libinput-gestures
       libreoffice
       maim
       mediathekview
@@ -49,6 +52,7 @@
       tigervnc
       vlc
       wasistlos
+      wtype
       xclip
       xdg-user-dirs
       xmobar
@@ -92,15 +96,21 @@
 
   services = {
     blueman.enable = true;
-    
+    emacs = {
+      enable = true;
+      startWithGraphical = true;
+      package = pkgs.emacs;
+    };
     xserver = {
       enable = true;
       dpi = 192;
-      displayManager.lightdm.enable = false;
-      windowManager.xmonad = {
-        enable = true;
-        enableContribAndExtras = true;
-      };
+#      displayManager.lightdm.enable = false;
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
+#      windowManager.xmonad = {
+#        enable = true;
+#        enableContribAndExtras = true;
+#      };
     };
   };
 

@@ -2,16 +2,28 @@
   imports = [ ./ramge.nix ];
 
   # Einheitliche Zeitzone
-  time.timeZone = "Europe/Berlin";
+#  time.timeZone = "Europe/Berlin";
+   time.timeZone = "Africa/Dar_es_Salaam";
   
-  services.gvfs.enable = true;
-
-  # Globale Tastatur-Basiskonfiguration
-  services.xserver.xkb = {
-    layout = "de";
-    variant = "nodeadkeys"; # Standard für normale PCs
-    options = "ctrl:nocaps";
+  services = {
+    gvfs.enable = true;
+    xserver.xkb = {               # Globale Tastatur-Basiskonfiguration
+        layout = "de";
+        variant = "nodeadkeys";              # Standard für normale PCs
+        options = "ctrl:nocaps";
+    };
+    # udisks2 für automatisches/einfaches Mounten aktivieren
+    udisks2.enable = true;
+    openssh.enable = true;
+    blueman.enable = true;
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+    };
+    # Druckdienst systemweit für alle Rechner aktivieren
+    printing.enable = true;
   };
+
   console.useXkbConfig = true;
 
   # Standard-Spracheinstellungen
@@ -39,8 +51,6 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
-  # udisks2 für automatisches/einfaches Mounten aktivieren
-  services.udisks2.enable = true;
 
   # Unterstützung für gängige externe Dateisysteme aktivieren
   boot.supportedFilesystems = [ "ntfs" "exfat" "zfs" ];
@@ -59,8 +69,10 @@
     ripgrep
     sops
     tmux
+    unzip
     usbutils
     vim
+    zip
     zsh
   ];
 
@@ -71,26 +83,10 @@
     syntaxHighlighting.enable = true;
   };
   
-  services.openssh.enable = true;
 
   sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
-  services.blueman.enable = true;
-  
-  services.emacs = {
-    enable = true;
-    startWithGraphical = false;
-    package = pkgs.emacs-nox;
-  };
 
-  # Avahi für die Auflösung von .local-Adressen (z. B. drucker.local)
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-  };
-
-  # Druckdienst systemweit für alle Rechner aktivieren
-  services.printing.enable = true;
 
   hardware.printers = {
     ensurePrinters = [

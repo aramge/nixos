@@ -57,7 +57,9 @@
         ".config/ghostty".source       = link "${dotfiles}/ghostty/.config/ghostty";
         ".config/git".source           = link "${dotfiles}/git/.config/git";
         ".config/hypr".source          = link "${dotfiles}/hypr/.config/hypr";
-        ".config/tmux/tmux.conf".source =link "${dotfiles}/tmux/.config/tmux/tmux.conf";
+        ".config/isyncrc".source       = link "${dotfiles}/mbsync/isyncrc";
+        ".config/libinput-gestures".source = link "${dotfiles}/libinput-gestures";
+        ".config/tmux".source          = link "${dotfiles}/tmux/.config/tmux";
         ".config/waybar".source        = link "${dotfiles}/waybar/.config/waybar";
         ".xmobarrc".source             = link "${dotfiles}/xmobar/xmobarrc";
         ".config/xmonad".source        = link "${dotfiles}/xmonad/.config/xmonad";
