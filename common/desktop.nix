@@ -1,9 +1,28 @@
 { pkgs, lib, ... }: {
 
+  nixpkgs.config.permittedInsecurePackages = [
+      "electron-38.8.4"
+  ];
+  
   environment = {
     sessionVariables.NIXOS_OZONE_WL = "1";
-    
+
     systemPackages = with pkgs; [
+      # Datenbank-Tools
+      dbeaver-bin
+      sqlite
+
+      # RStudio als Wrapper, der die CRAN-Pakete direkt mitbringt
+      (rstudioWrapper.override {
+        packages = with rPackages; [
+          # Hier trägst du deine gewünschten CRAN-Pakete ein, z. B.:
+          dplyr
+          ggplot2
+          DBI
+          RSQLite
+        ];
+      })
+
       (writeShellScriptBin "fix-dpi" ''
         # Pfade explizit über Nix-Store auflösen
         XRANDR="${xorg.xrandr}/bin/xrandr"
@@ -33,6 +52,7 @@
       gimp
       gmrun
       gnomeExtensions.forge
+      gnomeExtensions.blur-my-shell
       gnome-tweaks
       gnucash
       inkscape
