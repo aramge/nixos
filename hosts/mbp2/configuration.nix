@@ -24,12 +24,14 @@
       powerOnBoot = true;
     };
     enableRedistributableFirmware = true;
-    # Spezifische Treiber für Intel Iris (A1502)
-    graphics.extraPackages = with pkgs; [
-      intel-media-driver # Für Broadwell und neuer (dein A1502)
-      intel-vaapi-driver # Der klassische Treiber als Fallback
-      libvdpau-va-gl
-    ];
+    graphics = {
+      enable32Bit = true; # Wichtig für einige ältere Apps/Steam
+      extraPackages = with pkgs; [
+        intel-media-driver # Für Broadwell und neuer (dein A1502)
+        intel-vaapi-driver # Der klassische Treiber als Fallback
+        libvdpau-va-gl
+      ];
+    };
   };
   
   #  powerManagement.cpuFreqGovernor = "powersave";

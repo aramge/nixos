@@ -100,20 +100,6 @@
     ];
   };
 
-  hardware = {
-    bluetooth.enable = true;
-    graphics = {
-      enable = true;
-      enable32Bit = true; # Wichtig für einige ältere Apps/Steam
-    };
-  };
-
-  programs = {
-    hyprland.enable = true; # Hyprland nativ aktivieren (baut die Session für LightDM)
-    nm-applet.enable = true;
-    waybar.enable = true;
-  };
-
   services = {
     blueman.enable = true;
     emacs = {
@@ -121,17 +107,8 @@
       startWithGraphical = true;
       package = pkgs.emacs;
     };
-    xserver = {
-      enable = true;
-      dpi = 192;
-#      displayManager.lightdm.enable = false;
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
-#      windowManager.xmonad = {
-#        enable = true;
-#        enableContribAndExtras = true;
-#      };
-    };
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
   };
 
   xdg = {
