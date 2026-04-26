@@ -51,6 +51,7 @@
       ghostty
       gimp
       gmrun
+      gnomeExtensions.dash-to-dock
       gnomeExtensions.forge
       gnomeExtensions.blur-my-shell
       gnome-tweaks

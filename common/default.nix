@@ -2,8 +2,8 @@
   imports = [ ./ramge.nix ];
 
   # Einheitliche Zeitzone
-#  time.timeZone = "Europe/Berlin";
-   time.timeZone = "Africa/Dar_es_Salaam";
+  time.timeZone = "Europe/Berlin";
+#   time.timeZone = "Africa/Dar_es_Salaam";
   
   services = {
     gvfs.enable = true;
@@ -64,6 +64,11 @@
     btop
     exfat    # Für moderne SD-Karten/Sticks (ExFAT)
     fd
+    hunspell
+    hunspellDicts.de_DE
+    hunspellDicts.en_US-large
+    hyphenDicts.de_DE
+    hyphenDicts.en_US
     ntfs3g   # Für Windows-Festplatten (NTFS)
     python3
     ripgrep
