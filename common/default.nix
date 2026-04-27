@@ -1,5 +1,5 @@
 { config, pkgs, ... }: {
-  imports = [ ./ramge.nix ];
+  imports = [ ../users/ramge/nixos.nix ];
 
   # Einheitliche Zeitzone
   time.timeZone = "Europe/Berlin";
