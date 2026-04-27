@@ -49,6 +49,7 @@
       "nofail" 
       "x-systemd.automount" 
       "noauto" 
+      "access=any"
     ];
   };
   
