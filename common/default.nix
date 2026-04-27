@@ -1,6 +1,8 @@
 { config, pkgs, ... }: {
   imports = [ ../users/ramge/nixos.nix ];
 
+  boot.kernelPackages = pkgs.linuxPackages_6_19;
+
   # Einheitliche Zeitzone
   time.timeZone = "Europe/Berlin";
 #   time.timeZone = "Africa/Dar_es_Salaam";

@@ -1,47 +1,29 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
-  imports = [
-    ./hardware-configuration.nix
-    ../../common/default.nix
-    ../../common/desktop.nix
-  ];
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  imports =
+    [
+      ./hardware-configuration.nix
+      ../../common/default.nix
+      ../../common/desktop.nix
+    ];
 
   networking.hostName = "qnixos";
-  networking.networkmanager.enable = true;
+#  boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  security.sudo.extraRules = [
-    {
-      users = [ "ramge" ];
-      commands = [
-        {
-          command = "ALL";
-          options = [ "NOPASSWD" ];
-        }
-      ];
-    }
-  ];
+  boot.loader.grub.enable = true;
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.device = "nodev";
+  boot.loader.efi.canTouchEfiVariables = true;
 
   services.xserver.xkb.options = "caps:ctrl_modifier";
 
-  services.printing.enable = true;
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
   services.qemuGuest.enable = true;
-  services.xrdp.enable = true;
-  services.xrdp.defaultWindowManager = "xmonad";
-  services.xrdp.openFirewall = true;
+  services.xrdp = {
+    enable = true;
+    defaultWindowManager = "xmonad";
+    openFirewall = true;
+  };
 
   environment.systemPackages = with pkgs; [
     google-chrome
