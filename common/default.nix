@@ -66,6 +66,7 @@
     btop
     exfat    # Für moderne SD-Karten/Sticks (ExFAT)
     fd
+    git
     hunspell
     hunspellDicts.de_DE
     hunspellDicts.en_US-large

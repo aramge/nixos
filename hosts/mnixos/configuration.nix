@@ -13,6 +13,8 @@
     efi.canTouchEfiVariables = true;
   };
 
+  boot.kernelParams = [ "video=Virtual-1:2560x1440@60" ];
+
   networking = {
     hostName = "mnixos";
     networkmanager.enable = true;
@@ -39,20 +41,27 @@
   };
 
   # UTM Shared Folder
-  fileSystems."/mnt/mac-share" = {
+  # 1. Der rohe, versteckte Mount-Punkt
+  fileSystems."/mnt/mac-share-raw" = {
     device = "share";
     fsType = "9p";
-    options = [ 
-      "trans=virtio" 
-      "version=9p2000.L" 
-      "msize=1048576" 
-      "nofail" 
-      "x-systemd.automount" 
-      "noauto" 
-      "access=any"
-    ];
+    options = [ "trans=virtio" "version=9p2000.L" "msize=1048576" "nofail" ];
   };
-  
+
+  # 2. Die Übersetzer-Schicht für deinen User
+  fileSystems."/mnt/mac-share" = {
+    device = "/mnt/mac-share-raw";
+    fsType = "fuse.bindfs";
+    depends = [ "/mnt/mac-share-raw" ];
+    options = [ 
+      "force-user=ramge"        # In der VM gehört alles dir
+      "force-group=users"
+      "create-for-user=501"     # Neue Dateien bekommen auf dem Mac die 501
+      "create-for-group=20"     # 20 ist die Standard 'staff'-Gruppe auf macOS
+      "allow_other"             # Erlaubt dem Root-User (für Rebuilds) den Zugriff
+      "nofail" 
+    ];
+  }; 
   systemd.tmpfiles.rules = [ "L+ /home/ramge/sync - - - - /mnt/mac-share" ];
   
   environment.systemPackages = with pkgs; [ brightnessctl spice-vdagent ];

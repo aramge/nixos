@@ -12,14 +12,14 @@ in {
   };
 
   home.file = {
-    ".config/ghostty".source = link "${dotfiles}/ghostty/.config/ghostty";
-    ".zshenv".source = link "${dotfiles}/zsh/.zshenv";
-    ".config/zsh".source = link "${dotfiles}/zsh/.config/zsh";
     ".config/emacs".source = link "${dotfiles}/emacs/.config/emacs";
-    ".config/niri".source = link "${dotfiles}/niri/.config/niri";
+    ".config/ghostty".source = link "${dotfiles}/ghostty/.config/ghostty";
     ".config/git".source = link "${dotfiles}/git/.config/git";
+    ".config/niri".source = link "${dotfiles}/niri/.config/niri";
     ".config/tmux".source = link "${dotfiles}/tmux/.config/tmux";
     ".config/waybar".source = link "${dotfiles}/waybar/.config/waybar";
+    ".config/zsh".source = link "${dotfiles}/zsh/.config/zsh";
+    ".zshenv".source = link "${dotfiles}/zsh/.zshenv";
     # Die restlichen Links kannst du später ergänzen, wenn das Bild steht!
   };
 }
