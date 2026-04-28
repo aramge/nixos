@@ -1,4 +1,6 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+
+{
   users.groups.ramge = {
     gid = 1001;
   };
@@ -8,7 +10,7 @@
     uid = 1001;
     group = "ramge";
     description = "Axel Ramge";
-    extraGroups = [ "networkmanager" "wheel" "docker" "users" "video" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "users" "video" "render" ];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM8q7f2ZLoCoSgmwoP6FjzJF23c1QHI36CO8oSrJMDxd ansible"
@@ -27,4 +29,12 @@
       User git
       IdentityFile ~/.ssh/github_ed25519
   '';
+
+  # Dein "NixOS-stow" für die Dotfiles
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    backupFileExtension = "bak";
+    users.ramge = import ./home.nix;
+  };
 }

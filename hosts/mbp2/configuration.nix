@@ -17,7 +17,9 @@
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
-  
+
+  boot.initrd.kernelModules = [ "i915" ];
+
   hardware = {
     bluetooth = {
       enable = true;
@@ -25,7 +27,6 @@
     };
     enableRedistributableFirmware = true;
     graphics = {
-      enable32Bit = true; # Wichtig für einige ältere Apps/Steam
       extraPackages = with pkgs; [
         intel-media-driver # Für Broadwell und neuer (dein A1502)
         intel-vaapi-driver # Der klassische Treiber als Fallback
@@ -33,7 +34,7 @@
       ];
     };
   };
-  
+
   #  powerManagement.cpuFreqGovernor = "powersave";
   powerManagement.cpuFreqGovernor = "schedutil";
 

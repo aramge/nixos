@@ -66,9 +66,6 @@
   
   environment.systemPackages = with pkgs; [ brightnessctl spice-vdagent ];
 
-  # Host-spezifische User-Rechte (wichtig für Grafik-Zugriff in der VM)
-  users.users.ramge.extraGroups = [ "networkmanager" "video" "render" "docker" ];
-
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;

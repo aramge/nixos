@@ -1,4 +1,5 @@
 { pkgs, osConfig, config, ... }:
+
 let
   dotfiles = "/home/ramge/sync/gh/dotfiles";
   link = config.lib.file.mkOutOfStoreSymlink;
@@ -6,8 +7,10 @@ in {
   home.stateVersion = "25.11";
 
   programs.waybar.enable = true;
+  
   programs.rofi = {
     enable = true;
+    # Hinweis: Falls Rofi unter Niri nicht startet, hier pkgs.rofi-wayland eintragen
     package = pkgs.rofi;
   };
 

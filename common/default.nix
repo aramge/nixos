@@ -1,34 +1,24 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+
+{
   imports = [ ../users/ramge/nixos.nix ];
 
-  boot.kernelPackages = pkgs.linuxPackages_6_19;
-
-  # Einheitliche Zeitzone
-  time.timeZone = "Europe/Berlin";
-#   time.timeZone = "Africa/Dar_es_Salaam";
+  nix = {
+    settings.experimental-features = [ "nix-command" "flakes" ];
+  };
   
-  services = {
-    gvfs.enable = true;
-    xserver.xkb = {               # Globale Tastatur-Basiskonfiguration
-        layout = "de";
-        variant = "nodeadkeys";              # Standard für normale PCs
-        options = "ctrl:nocaps";
-    };
-    # udisks2 für automatisches/einfaches Mounten aktivieren
-    udisks2.enable = true;
-    openssh.enable = true;
-    blueman.enable = true;
-    avahi = {
-      enable = true;
-      nssmdns4 = true;
-    };
-    # Druckdienst systemweit für alle Rechner aktivieren
-    printing.enable = true;
+  nixpkgs.config.allowUnfree = true;
+
+  boot = {
+    kernelPackages = pkgs.linuxPackages_6_19;
+    supportedFilesystems = [ "ntfs" "exfat" "zfs" ];
   };
 
-  console.useXkbConfig = true;
+  networking.hostId = builtins.substring 0 8 (builtins.hashString "sha256" config.networking.hostName);
 
-  # Standard-Spracheinstellungen
+  time.timeZone = "Europe/Berlin";
+  # time.timeZone = "Africa/Dar_es_Salaam";
+
   i18n = {
     defaultLocale = "en_US.UTF-8";
     extraLocaleSettings = {
@@ -49,22 +39,33 @@
     ];
   };
 
-  # Flakes aktivieren und proprietäre Software erlauben
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nixpkgs.config.allowUnfree = true;
+  console.useXkbConfig = true;
 
+  services = {
+    gvfs.enable = true;
+    udisks2.enable = true;
+    openssh.enable = true;
+    blueman.enable = true;
+    printing.enable = true;
+    
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+    };
+    
+    xserver.xkb = {
+      layout = "de";
+      variant = "nodeadkeys";
+      options = "ctrl:nocaps";
+    };
+  };
 
-  # Unterstützung für gängige externe Dateisysteme aktivieren
-  boot.supportedFilesystems = [ "ntfs" "exfat" "zfs" ];
-  networking.hostId = builtins.substring 0 8 (builtins.hashString "sha256" config.networking.hostName);
-  
-  # Core-Tools für jeden Rechner
   environment.systemPackages = with pkgs; [
     abduco
     bash
     bat
     btop
-    exfat    # Für moderne SD-Karten/Sticks (ExFAT)
+    exfat # Für moderne SD-Karten/Sticks (ExFAT)
     fd
     git
     hunspell
@@ -72,7 +73,7 @@
     hunspellDicts.en_US-large
     hyphenDicts.de_DE
     hyphenDicts.en_US
-    ntfs3g   # Für Windows-Festplatten (NTFS)
+    ntfs3g # Für Windows-Festplatten (NTFS)
     python3
     ripgrep
     sops
@@ -90,11 +91,8 @@
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
   };
-  
 
   sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-
-
 
   hardware.printers = {
     ensurePrinters = [
