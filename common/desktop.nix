@@ -44,20 +44,30 @@
       wasistlos
       wl-clipboard
       wtype
-    ] ++ lib.optionals pkgs.stdenv.isx86_64 [ google-chrome winbox ];
+    ] ++ lib.optionals pkgs.stdenv.isx86_64 [ google-chrome winbox4 ];
   };
 
   fonts.packages = with pkgs; [
+    # Der Goldstandard für das Terminal und alle Icons in Niri/Waybar
     nerd-fonts.jetbrains-mono
+    
+    # Das Sicherheitsnetz: Deckt praktisch alle Sprachen und Zeichen der Welt ab
     noto-fonts
-    noto-fonts-color-emoji
+    noto-fonts-cjk-sans # Für asiatische Schriftzeichen
+    noto-fonts-color-emoji    # Saubere Emojis für Chat und Web
+
+    # Die Klassiker: Arial, Times New Roman, Verdana (verhindert kaputte Webseiten)
+    corefonts 
   ];
+
+  # Macht die Schriften für das System und Wayland-Apps sauber verfügbar
+  fonts.fontconfig.enable = true;
 
   services = {
     emacs = {
       enable = true;
       startWithGraphical = true;
-      package = pkgs.emacs;
+      package = pkgs.emacs-pgtk;
     };
     greetd = {
       enable = true;

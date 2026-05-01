@@ -73,6 +73,7 @@
     hunspellDicts.en_US-large
     hyphenDicts.de_DE
     hyphenDicts.en_US
+    inotify-tools
     ntfs3g # Für Windows-Festplatten (NTFS)
     python3
     ripgrep

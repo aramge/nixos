@@ -11,6 +11,7 @@
     ./fix_broadcom.nix
     ./wg0.nix
     ./applesmc-next.nix
+    ./bt_dongle.nix
   ];
 
   boot.loader = {
@@ -44,15 +45,7 @@
   };
 
   services = {
-    mbpfan = {
-      enable = true;
-      settings.general = {
-        low_temp = 55;        # Temperatur, bei der die Lüfter spürbar anlaufen
-        high_temp = 75;       # Temperatur für stärkeren Lüfter-Einsatz
-        max_temp = 88;        # Ab hier drehen die Lüfter auf 100% (Standard ist oft erst bei 85°C)
-        polling_interval = 1; # Sensoren jede Sekunde prüfen
-      };
-    };
+    hardware.bolt.enable = true;
     libinput = {
       enable = true;
       mouse.naturalScrolling = true;
@@ -65,8 +58,16 @@
       };
     };
     # Überschreibt ausschließlich die Variante für das MacBook
+    mbpfan = {
+      enable = true;
+      settings.general = {
+        low_temp = 55;        # Temperatur, bei der die Lüfter spürbar anlaufen
+        high_temp = 75;       # Temperatur für stärkeren Lüfter-Einsatz
+        max_temp = 88;        # Ab hier drehen die Lüfter auf 100% (Standard ist oft erst bei 85°C)
+        polling_interval = 1; # Sensoren jede Sekunde prüfen
+      };
+    };
     xserver.xkb.variant = lib.mkForce "mac_nodeadkeys";
-    hardware.bolt.enable = true;
   };
 
   system.stateVersion = "25.11";
