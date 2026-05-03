@@ -65,6 +65,7 @@
     bash
     bat
     btop
+    curl
     exfat # Für moderne SD-Karten/Sticks (ExFAT)
     fd
     git
@@ -82,6 +83,7 @@
     unzip
     usbutils
     vim
+    wget
     zip
     zsh
   ];
@@ -104,5 +106,12 @@
       }
     ];
     ensureDefaultPrinter = "drucker";
+  };
+
+  systemd.targets = {
+    sleep.enable = false;
+    suspend.enable = false;
+    hibernate.enable = false;
+    hybrid-sleep.enable = false;
   };
 }
