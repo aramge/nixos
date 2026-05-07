@@ -7,6 +7,10 @@
 #   ssh nixos@172.20.0.252 sudo bash /tmp/nixos/hosts/kant/install.sh
 #
 set -euo pipefail
+export PATH=/run/current-system/sw/bin:$PATH
+
+echo "=== e2fsprogs installieren (für mkfs.ext4) ==="
+nix-env -iA nixos.e2fsprogs
 
 DISK=/dev/sda
 VG=vg-kant
@@ -69,10 +73,16 @@ mount -t zfs "$POOL/ramge" /mnt/home
 swapon "/dev/$VG/swap"
 
 echo "=== Repo nach /mnt/etc/nixos kopieren ==="
+mkdir -p /mnt/etc
 cp -r /tmp/nixos /mnt/etc/nixos
 
-echo "=== NixOS installieren ==="
+echo "=== ZFS Pool exportieren (wichtig vor reboot!) ==="
+cd /mnt/etc/nixos && git add hosts/kant/
 nixos-install --flake /mnt/etc/nixos#kant --no-root-passwd
+
+echo "=== ZFS Pool sauber exportieren ==="
+umount /mnt/home
+zpool export home
 
 echo ""
 echo "=== Fertig! ==="
