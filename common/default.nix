@@ -46,7 +46,10 @@
     udisks2.enable = true;
     openssh.enable = true;
     blueman.enable = true;
-    printing.enable = true;
+    printing = {
+      enable = true;
+      drivers = [ ];
+    };
     
     avahi = {
       enable = true;
@@ -65,6 +68,8 @@
     bash
     bat
     btop
+    claude-code
+    curl
     exfat # Für moderne SD-Karten/Sticks (ExFAT)
     fd
     git
@@ -75,6 +80,8 @@
     hyphenDicts.en_US
     inotify-tools
     ntfs3g # Für Windows-Festplatten (NTFS)
+    ptouch-print
+    ptouch-driver
     python3
     ripgrep
     sops
@@ -82,6 +89,7 @@
     unzip
     usbutils
     vim
+    wget
     zip
     zsh
   ];
@@ -104,5 +112,12 @@
       }
     ];
     ensureDefaultPrinter = "drucker";
+  };
+
+  systemd.targets = {
+    sleep.enable = false;
+    suspend.enable = false;
+    hibernate.enable = false;
+    hybrid-sleep.enable = false;
   };
 }

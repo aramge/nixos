@@ -5,21 +5,28 @@
     ./hardware-configuration.nix
     ../../common/default.nix
     ../../common/desktop.nix
+    ../../common/gnome-paperwm.nix
     ../../common/gdrive-mount.nix
     ../../common/syncthing.nix
     ../../common/mail-ramge.nix
-    ./fix_broadcom.nix
     ./wg0.nix
     ./applesmc-next.nix
-    ./bt_dongle.nix
+#    ./fix_broadcom.nix
+#    ./bt_dongle.nix
+    ./broadcom_off.nix
   ];
 
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
-
   boot.initrd.kernelModules = [ "i915" ];
+  boot.extraModprobeConfig = ''
+    # Magic Mouse: 3-Tasten-Emulation aus, Scrollen an, aber Beschleunigung aus und drosseln
+    options hid_magicmouse emulate_3button=0 emulate_scroll_wheel=1 scroll_acceleration=0 scroll_speed=20
+    # Bluetooth Alfa Dongle: Autosuspend verbieten gegen Disconnects
+    options btusb enable_autosuspend=n
+  '';
 
   hardware = {
     bluetooth = {
@@ -44,20 +51,10 @@
     networkmanager.enable = true;
   };
 
+  security.rtkit.enable = true;
+  
   services = {
     hardware.bolt.enable = true;
-    libinput = {
-      enable = true;
-      mouse.naturalScrolling = true;
-      touchpad = {
-        naturalScrolling = true;
-        disableWhileTyping = true; # Ignoriert das Touchpad komplett, solange du tippst
-        accelSpeed = "-0.3";       # Drosselt die Grundnervosität (Werte von "-1.0" bis "1.0", Standard ist "0")
-        # Falls dir bloßes Berühren (Tap-to-click) generell zu empfindlich ist:
-        # tapping = false; # Auskommentieren, wenn du physisch drücken willst
-      };
-    };
-    # Überschreibt ausschließlich die Variante für das MacBook
     mbpfan = {
       enable = true;
       settings.general = {
@@ -67,6 +64,14 @@
         polling_interval = 1; # Sensoren jede Sekunde prüfen
       };
     };
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+    pulseaudio.enable = false;
+    # Überschreibt ausschließlich die Variante für das MacBook
     xserver.xkb.variant = lib.mkForce "mac_nodeadkeys";
   };
 

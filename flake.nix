@@ -64,8 +64,17 @@
       # mbp2
       mbp2 = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
-        modules = [ 
+        modules = [
           ./hosts/mbp2/configuration.nix
+          home-manager.nixosModules.home-manager
+          sops-nix.nixosModules.sops
+        ];
+      };
+      # kant - Desktop i5-9600K
+      kant = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/kant/configuration.nix
           home-manager.nixosModules.home-manager
           sops-nix.nixosModules.sops
         ];

@@ -6,14 +6,6 @@ let
 in {
   home.stateVersion = "25.11";
 
-  programs.waybar.enable = true;
-  
-  programs.rofi = {
-    enable = true;
-    # Hinweis: Falls Rofi unter Niri nicht startet, hier pkgs.rofi-wayland eintragen
-    package = pkgs.rofi;
-  };
-
   home.file = {
     ".config/ghostty".source = link "${dotfiles}/ghostty/.config/ghostty";
     ".zshenv".source = link "${dotfiles}/zsh/.zshenv";

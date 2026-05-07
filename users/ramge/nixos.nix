@@ -10,7 +10,16 @@
     uid = 1001;
     group = "ramge";
     description = "Axel Ramge";
-    extraGroups = [ "networkmanager" "wheel" "docker" "users" "video" "render" ];
+    extraGroups = [ 
+      "dialout"
+      "docker" 
+      "networkmanager" 
+      "printadmin"
+      "render" 
+      "users" 
+      "video" 
+      "wheel" 
+    ];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM8q7f2ZLoCoSgmwoP6FjzJF23c1QHI36CO8oSrJMDxd ansible"
