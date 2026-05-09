@@ -4,12 +4,11 @@
   imports = [
     ./hardware-configuration.nix
     ../../common/default.nix # Hierüber kommt die ramge.nix mit Sudo-Regeln und User-Settings
+    ../../common/monitor.nix
   ];
 
   # Bootloader-Konfiguration für EFI-Systeme
   boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
   
   # Kernel-Parameter, wichtig für die serielle Konsole im Headless-Betrieb
   boot.kernelParams = [ "console=tty0" "console=ttyS0,115200" ];
@@ -19,7 +18,6 @@
   networking.networkmanager.enable = true;
 
   # Klassische Tastaturbelegung für die Textkonsole (da kein X-Server existiert)
-  console.keyMap = "de";
 
   # Docker-Aktivierung für Container-Workloads
   virtualisation.docker.enable = true;
