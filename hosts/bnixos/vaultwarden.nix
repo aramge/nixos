@@ -15,7 +15,7 @@
       extraDomainNames = [ "ramge-pm.de" ];
       dnsProvider = "hetzner";
       credentialFiles = {
-        "HETZNER_API_KEY_FILE" = config.sops.secrets.hetzner-api-key.path;
+        "HETZNER_API_TOKEN_FILE" = config.sops.secrets.hetzner-api-key.path;
       };
     };
   };
