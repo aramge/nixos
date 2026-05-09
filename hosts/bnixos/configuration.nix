@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./vaultwarden.nix
     ../../common/default.nix # Hierüber kommt die ramge.nix mit Sudo-Regeln und User-Settings
     ../../common/monitor.nix
   ];

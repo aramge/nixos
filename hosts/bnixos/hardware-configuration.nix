@@ -27,6 +27,11 @@
       fsType = "ext4";
     };
 
+  fileSystems."/var/lib/vaultwarden" = {
+    device = "/dev/disk/by-uuid/2b31f451-55f8-4d35-b610-f9bfb57a36ad";
+    fsType = "ext4";
+  };
+
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
