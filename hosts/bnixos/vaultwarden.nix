@@ -27,8 +27,6 @@
       DATA_FOLDER = "/var/lib/vaultwarden";
       ROCKET_ADDRESS = "127.0.0.1";
       ROCKET_PORT = 8222;
-      WEBSOCKET_ENABLED = true;
-      WEBSOCKET_PORT = 3012;
       DOMAIN = "https://vv.m.ramge-pm.de";
       SIGNUPS_ALLOWED = true; # nach erster Registrierung auf false setzen
       LOG_LEVEL = "warn";
@@ -54,15 +52,6 @@
       locations."/" = {
         proxyPass = "http://127.0.0.1:8222";
         proxyWebsockets = true;
-      };
-
-      locations."/notifications/hub" = {
-        proxyPass = "http://127.0.0.1:3012";
-        proxyWebsockets = true;
-      };
-
-      locations."/notifications/hub/negotiate" = {
-        proxyPass = "http://127.0.0.1:8222";
       };
     };
   };
