@@ -27,7 +27,7 @@
       DATA_FOLDER = "/var/lib/vaultwarden";
       ROCKET_ADDRESS = "127.0.0.1";
       ROCKET_PORT = 8222;
-      DOMAIN = "https://vv.m.ramge-pm.de";
+      DOMAIN = "https://vv.ramge-pm.de";
       SIGNUPS_ALLOWED = true; # nach erster Registrierung auf false setzen
       LOG_LEVEL = "warn";
     };
@@ -44,7 +44,7 @@
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
-    virtualHosts."vv.m.ramge-pm.de" = {
+    virtualHosts."vv.ramge-pm.de" = {
       serverAliases = [ "vv" ];
       forceSSL = true;
       useACMEHost = "ramge-pm.de";
