@@ -17,7 +17,7 @@
             };
           };
           lvm = {
-            size = "50%";
+            size = "116G";
             content = {
               type = "lvm_pv";
               vg = "vg-peano";
