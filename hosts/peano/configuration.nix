@@ -3,12 +3,13 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./disko.nix
     ../../common/default.nix
     ../../common/desktop.nix
     ../../common/gnome-paperwm.nix
   ];
 
-  networking.hostName = "kant";
+  networking.hostName = "peano";
   networking.networkmanager.enable = true;
 
   boot.loader.systemd-boot.enable = true;

@@ -11,9 +11,14 @@
     };
     
     sops-nix.url = "github:Mic92/sops-nix";
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, sops-nix, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, sops-nix, disko, ... }@inputs: {
     nixosConfigurations = {
       # bare metal
       n100-nixos = nixpkgs.lib.nixosSystem {
@@ -70,11 +75,12 @@
           sops-nix.nixosModules.sops
         ];
       };
-      # kant - Desktop i5-9600K
-      kant = nixpkgs.lib.nixosSystem {
+      # peano - Desktop i5-9600K
+      peano = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
-          ./hosts/kant/configuration.nix
+          ./hosts/peano/configuration.nix
+          disko.nixosModules.disko
           home-manager.nixosModules.home-manager
           sops-nix.nixosModules.sops
         ];

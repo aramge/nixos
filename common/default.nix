@@ -10,7 +10,7 @@
   nixpkgs.config.allowUnfree = true;
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_6_19;
+    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
     supportedFilesystems = [ "ntfs" "exfat" "zfs" ];
   };
 
