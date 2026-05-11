@@ -1,5 +1,4 @@
-# Hardware-Konfiguration für peano (i5-9600K, nvme0n1: 512M EFI + LVM nixos/swap + ZFS home)
-# Disk-Layout und fileSystems werden von disko.nix generiert.
+# Hardware-Konfiguration für peano (i5-9600K, nvme0n1: 512M EFI + LVM vg-peano + ZFS home)
 { config, lib, pkgs, modulesPath, ... }:
 
 {
@@ -14,6 +13,26 @@
 
   # LVM aktivieren
   boot.initrd.services.lvm.enable = true;
+
+  fileSystems."/" = {
+    device = "/dev/vg-peano/nixos";
+    fsType = "ext4";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-partlabel/EFI";
+    fsType = "vfat";
+    options = [ "fmask=0022" "dmask=0022" ];
+  };
+
+  fileSystems."/home" = {
+    device = "home/ramge";
+    fsType = "zfs";
+  };
+
+  swapDevices = [
+    { device = "/dev/vg-peano/swap"; }
+  ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
