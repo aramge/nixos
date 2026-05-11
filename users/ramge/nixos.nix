@@ -23,6 +23,7 @@
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM8q7f2ZLoCoSgmwoP6FjzJF23c1QHI36CO8oSrJMDxd ansible"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIsxiVYNp+LHETdBg14rYMaS13FJHa/29sD3PlLRglrn axel@ramge.de"
     ];
   };
 
