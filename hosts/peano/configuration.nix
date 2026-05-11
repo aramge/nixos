@@ -7,6 +7,7 @@
     ../../common/default.nix
     ../../common/desktop.nix
     ../../common/gnome-paperwm.nix
+    ../../common/daskeyboard.nix
   ];
 
   networking.hostName = "peano";

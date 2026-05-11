@@ -6,6 +6,7 @@
     ../../common/default.nix
     ../../common/desktop.nix
     ../../common/nfs-turing.nix
+    ../../common/daskeyboard.nix
   ];
 
   networking.hostName = "n100-nixos";
@@ -20,7 +21,6 @@
   services.xserver.xkb = {
     layout = "de";
     variant = pkgs.lib.mkForce "nodeadkeys";
-    options = "altwin:swap_lalt_lwin,caps:ctrl_modifier";
   };
 
   services.libinput = {
