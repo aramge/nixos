@@ -9,6 +9,7 @@
     ];
 
   networking.hostName = "qnixos";
+  networking.hostId = "6120bcb1";
 #  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.loader.grub.enable = true;

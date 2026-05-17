@@ -8,6 +8,7 @@
   ];
 
   networking.hostName = "qtnixos";
+  networking.hostId = "209f68eb";
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;

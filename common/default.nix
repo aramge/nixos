@@ -10,11 +10,8 @@
   nixpkgs.config.allowUnfree = true;
 
   boot = {
-    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
     supportedFilesystems = [ "ntfs" "exfat" "zfs" ];
   };
-
-  networking.hostId = builtins.substring 0 8 (builtins.hashString "sha256" config.networking.hostName);
 
   time.timeZone = "Europe/Berlin";
   # time.timeZone = "Africa/Dar_es_Salaam";

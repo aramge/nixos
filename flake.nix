@@ -79,6 +79,7 @@
       peano = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
+          disko.nixosModules.disko
           ./hosts/peano/configuration.nix
           home-manager.nixosModules.home-manager
           sops-nix.nixosModules.sops

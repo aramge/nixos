@@ -16,6 +16,7 @@
 
   # Netzwerkkonfiguration
   networking.hostName = "bnixos";
+  networking.hostId = "43f9c1a3";
   networking.networkmanager.enable = true;
 
   # Klassische Tastaturbelegung für die Textkonsole (da kein X-Server existiert)

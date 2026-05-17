@@ -10,6 +10,7 @@
   ];
 
   networking.hostName = "n100-nixos";
+  networking.hostId = "9b7240c7";
   networking.networkmanager.enable = true;
   networking.interfaces.enp2s0.macAddress = "a8:b8:e0:04:46:36";
 
