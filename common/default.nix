@@ -84,7 +84,7 @@
     mtr
     nmap
     ntfs3g # Für Windows-Festplatten (NTFS)
-    pcitutils
+    pciutils
     ptouch-print
     ptouch-driver
     python3
