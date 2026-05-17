@@ -41,6 +41,7 @@
       tigervnc
       vlc
       wasistlos
+      winbox4
       wl-clipboard
       wtype
     ] ++ lib.optionals pkgs.stdenv.isx86_64 [ google-chrome winbox4 ];

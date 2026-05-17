@@ -70,6 +70,8 @@
     btop
     claude-code
     curl
+    dmidecode 
+    ethtool
     exfat # Für moderne SD-Karten/Sticks (ExFAT)
     fd
     git
@@ -79,12 +81,17 @@
     hyphenDicts.de_DE
     hyphenDicts.en_US
     inotify-tools
+    mtr
+    nmap
     ntfs3g # Für Windows-Festplatten (NTFS)
+    pcitutils
     ptouch-print
     ptouch-driver
     python3
     ripgrep
+    smartmontools
     sops
+    tcpdump
     tmux
     unzip
     usbutils

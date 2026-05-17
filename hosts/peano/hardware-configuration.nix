@@ -11,8 +11,18 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  # LVM aktivieren
+  # LVM aktivieren — NUR vg-peano, fremde VGs ignorieren
   boot.initrd.services.lvm.enable = true;
+  boot.initrd.systemd.contents."/etc/lvm/lvmlocal.conf".text = ''
+    activation {
+      auto_activation_volume_list = [ "vg-peano" ]
+    }
+  '';
+  environment.etc."lvm/lvmlocal.conf".text = ''
+    activation {
+      auto_activation_volume_list = [ "vg-peano" ]
+    }
+  '';
 
   fileSystems."/" = {
     device = "/dev/vg-peano/nixos";
@@ -20,10 +30,14 @@
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-partlabel/EFI";
+    device = "/dev/disk/by-uuid/02C7-5F39";
     fsType = "vfat";
     options = [ "fmask=0022" "dmask=0022" ];
   };
+
+  # ZFS: nur eigenen Pool importieren, keine fremden Pools
+  boot.zfs.forceImportRoot = false;
+  boot.zfs.devNodes = "/dev/disk/by-id";
 
   fileSystems."/home" = {
     device = "home/ramge";
